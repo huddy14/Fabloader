@@ -22,7 +22,7 @@ import jendrzyca.piotr.fabloader.R;
  */
 
 public class Connector {
-    private final String API_KEY = "AIzaSyApKahzf_cB_dx8JYyXHocto5-YXY8ais4";
+    private final String API_KEY = "AIzaSyA7SIqqWifjEKZwaGJNj73K4ELyKYLvBCM";
 
     private final String LIST_ELEMENTS = "id,snippet";
     private final String TYPE = "video";

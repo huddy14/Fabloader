@@ -16,7 +16,7 @@ public class Downloader {
     private DownloadManager downloadManager;
     private DownloadManager.Request request;
 
-    private final String youtubeURLheader = "http://www.youtubeinmp3.com/fetch/?video=http://www.youtube.com/watch?v=";
+    private final String youtubeURLheader = "http://www.youtubeinmp3.com/fetch/?video=https://www.youtube.com/watch?v=";
 
 
     public static Downloader getInstance(Context context)
