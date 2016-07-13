@@ -11,35 +11,30 @@ import android.os.Environment;
 public class Downloader {
 
     private static Downloader instance;
-    private Context context;
-
+    private final String youtubeURLheader = "http://www.youtubeinmp3.com/fetch/?video=https://www.youtube.com/watch?v=";
     private DownloadManager downloadManager;
     private DownloadManager.Request request;
+    private Context context;
 
-    private final String youtubeURLheader = "http://www.youtubeinmp3.com/fetch/?video=https://www.youtube.com/watch?v=";
+    private Downloader(Context context) {
+        this.context = context;
+        downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+    }
 
-
-    public static Downloader getInstance(Context context)
-    {
-        if(instance==null)
+    public static Downloader getInstance(Context context) {
+        if (instance == null)
             instance = new Downloader(context);
         return instance;
     }
 
-    private Downloader(Context context)
-    {
-        this.context = context;
-        downloadManager = (DownloadManager)context.getSystemService(Context.DOWNLOAD_SERVICE);
-    }
-
-    public void download(Item item)
-    {
+    public void download(Item item) {
         String url = youtubeURLheader + item.getId();
 
         request = new DownloadManager.Request(Uri.parse(url));
         request.setTitle(item.getTittle());
+
         request.setDescription("Fabuuuje");
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, item.getTittle()+".mp3");
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, item.getTittle() + ".mp3");
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE | DownloadManager.Request.NETWORK_WIFI);
 
         downloadManager.enqueue(request);

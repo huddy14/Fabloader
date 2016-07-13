@@ -44,31 +44,27 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         test.setThumbnailURL("asd");
         test.setTittle("test");
         test.setDescription("opis");
-        test.setThumbnailURL("notvalid");
+        test.setThumbnailURL("asdsD");
         ArrayList<Item> items = new ArrayList<>();
-        items.add(test);
-        rv.setLayoutManager(new LinearLayoutManager(this));
         //rv.setAdapter(new YoutubeListAdapter(items));
-        rv.addOnItemTouchListener(new RecyclerViewListener(getApplicationContext(),this));
+        rv.addOnItemTouchListener(new RecyclerViewListener(getApplicationContext(), this));
         connector = new Connector(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu, menu);
-        SearchManager searchManager = (SearchManager)getSystemService(Context.SEARCH_SERVICE);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         MenuItem searchItem = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setSearchableInfo( searchManager.getSearchableInfo(getComponentName()));
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setSubmitButtonEnabled(true);
         searchView.setOnQueryTextListener(this);
         return true;
     }
 
 
-
-    private void updateAdapter()
-    {
+    private void updateAdapter() {
         rv.setAdapter(new YoutubeListAdapter(items));
     }
 
@@ -89,8 +85,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         Downloader.getInstance(this).download(items.get(position));
     }
 
-    private class FetchSongsData extends AsyncTask<String,Void,Void>
-    {
+    private class FetchSongsData extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... strings) {
             items = connector.search(strings[0]);

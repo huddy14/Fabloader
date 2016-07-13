@@ -25,15 +25,14 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
     private Context context;
     private ArrayList<Item> items;
 
-    public YoutubeListAdapter(ArrayList<Item> items)
-    {
+    public YoutubeListAdapter(ArrayList<Item> items) {
         this.items = items;
     }
 
     @Override
     public YoutubeItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         this.context = parent.getContext();
-        View v = LayoutInflater.from(context).inflate(R.layout.list_item,parent,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.list_item, parent, false);
         YoutubeItemViewHolder vh = new YoutubeItemViewHolder(v);
         return vh;
     }
@@ -65,9 +64,9 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
         public YoutubeItemViewHolder(View itemView) {
             super(itemView);
             //ButterKnife.bind(itemView);
-            description = (TextView)itemView.findViewById(R.id.descriptionTV);
-            tittle = (TextView)itemView.findViewById(R.id.tittleTV);
-            thumbnail = (ImageView)itemView.findViewById(R.id.thumbnail);
+            description = (TextView) itemView.findViewById(R.id.descriptionTV);
+            tittle = (TextView) itemView.findViewById(R.id.tittleTV);
+            thumbnail = (ImageView) itemView.findViewById(R.id.thumbnail);
         }
     }
 }
