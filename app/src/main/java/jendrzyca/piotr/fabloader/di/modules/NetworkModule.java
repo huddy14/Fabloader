@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
@@ -19,10 +20,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by huddy on 7/13/16.
  */
+@Module
 public class NetworkModule {
 
-    private final String BASE_URL_YOUTUBE = "https://www.googleapis.com/youtube/v3/search";
-    private final String BASE_URL_CONVERTER = "http://www.youtubeinmp3.com/fetch/?format=Json&video=";
+    private final String BASE_URL_YOUTUBE = "https://www.googleapis.com";
+    private final String BASE_URL_CONVERTER = "http://www.youtubeinmp3.com";
 
     public NetworkModule(){}
 
