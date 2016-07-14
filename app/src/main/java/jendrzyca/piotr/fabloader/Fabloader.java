@@ -14,20 +14,15 @@ import jendrzyca.piotr.fabloader.di.modules.NetworkModule;
 public class Fabloader extends Application {
 
     NetworkComponent networkComponent;
+
     @Override
     public void onCreate() {
         super.onCreate();
 
-//        networkComponent = DaggerNetworkComponent.builder()
-//                .appModule(new AppModule(this))
-//                .networkModule(new NetworkModule())
-//                .build();
         networkComponent = DaggerNetworkComponent.builder()
                 .appModule(new AppModule(this))
                 .networkModule(new NetworkModule())
                 .build();
-
-
     }
 
     public NetworkComponent getNetworkComponent()

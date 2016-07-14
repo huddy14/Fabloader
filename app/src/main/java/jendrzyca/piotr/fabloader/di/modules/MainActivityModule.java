@@ -1,11 +1,9 @@
 package jendrzyca.piotr.fabloader.di.modules;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import jendrzyca.piotr.fabloader.di.scopes.PerActivity;
-import jendrzyca.piotr.fabloader.ui.MainActivityPresenter;
+import jendrzyca.piotr.fabloader.ui.presenters.MainActivityPresenter;
 
 /**
  * Created by huddy on 7/13/16.

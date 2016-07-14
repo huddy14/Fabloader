@@ -8,9 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+import com.mikhaellopez.circularfillableloaders.CircularFillableLoaders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,10 @@ import jendrzyca.piotr.fabloader.View.RecyclerViewListener;
 import jendrzyca.piotr.fabloader.View.YoutubeListAdapter;
 import jendrzyca.piotr.fabloader.di.components.DaggerMainActivityComponent;
 import jendrzyca.piotr.fabloader.di.modules.MainActivityModule;
+import jendrzyca.piotr.fabloader.model.converter.SongDownload;
+import jendrzyca.piotr.fabloader.model.youtube.Item;
+import jendrzyca.piotr.fabloader.ui.presenters.MainActivityPresenter;
+import jendrzyca.piotr.fabloader.ui.presenters.MainActivityPresenterImpl;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener,
         RecyclerViewListener.SongItemEventListener, MainActivityPresenter.View  {
@@ -33,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     MainActivityPresenterImpl presenter;
 
     @Bind(R.id.rv)RecyclerView rc;
+    @Bind(R.id.loader)CircularFillableLoaders progress;
 
     YoutubeListAdapter adapter;
 
@@ -42,20 +50,40 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        initializeRecyclerView();
+        initializeProgress();
+
+        DaggerMainActivityComponent.builder()
+                .networkComponent(((Fabloader)getApplication()).getNetworkComponent())
+                .mainActivityModule(new MainActivityModule(this))
+                .build().inject(this);
+    }
+
+    private void initializeRecyclerView()
+    {
         rc.setLayoutManager(new LinearLayoutManager(this));
 
         adapter = new YoutubeListAdapter(new ArrayList<jendrzyca.piotr.fabloader.model.youtube.Item>());
 
         rc.setAdapter(adapter);
 
-        DaggerMainActivityComponent.builder()
-                .networkComponent(((Fabloader)getApplication()).getNetworkComponent())
-                .mainActivityModule(new MainActivityModule(this))
-                .build().inject(this);
-
-
+        rc.addOnItemTouchListener(new RecyclerViewListener(this,this));
     }
 
+    private void initializeProgress() {
+        progress.setProgress(90);
+        //progress.setColor(R.color.colorPrimaryDark);
+    }
+
+    private void displayProgress() {
+        progress.setVisibility(View.VISIBLE);
+        rc.setVisibility(View.INVISIBLE);
+    }
+
+    private void displaySonglist() {
+        rc.setVisibility(View.VISIBLE);
+        progress.setVisibility(View.INVISIBLE);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu, menu);
@@ -72,7 +100,11 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+        //właczenie progress baru
         presenter.load(query);
+
+        displayProgress();
+
         return true;
     }
 
@@ -81,26 +113,42 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         return false;
     }
 
+
+    //Przyciśnięcie itemu
     @Override
-    public void onTouch(int position) {
-        //Downloader.getInstance(this).download(items.get(position));
+    public void onTouch(String id) {
+        presenter.download(id);
+
+        displayProgress();
     }
 
 
     @Override
-    public void showResults(List<jendrzyca.piotr.fabloader.model.youtube.Item> songs) {
+    public void showResults(List<Item> songs) {
         adapter.update(songs);
 
+        displaySonglist();
     }
 
     @Override
-    public void showError(String errMessage) {
-        Log.w("BLAD",errMessage);
+    public void onConverterResponse(SongDownload songDownload) {
+        showMessage(getString(R.string.communicate_fabuje)+songDownload.getTitle());
     }
 
     @Override
-    public void showComplete() {
-
+    public void onError(String errMessage) {
+        displaySonglist();
+        showMessage(errMessage);
     }
 
+    @Override
+    public void onComplete() {
+        //wyłaczenie progreesbaru
+        displaySonglist();
+    }
+
+    private void showMessage(String message)
+    {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
 }

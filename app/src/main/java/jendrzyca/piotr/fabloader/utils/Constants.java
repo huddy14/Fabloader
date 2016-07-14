@@ -9,4 +9,5 @@ public class Constants {
     public static final String YOUTUBE_KEY = "AIzaSyA7SIqqWifjEKZwaGJNj73K4ELyKYLvBCM";
     public static final String YOUTUBE_MAX_RESULTS = "30";
     public static final String YOUTUBE_TYPE = "video";
+    public static final String CONVERTER_YOUTUBE_LINK = "https://www.youtube.com/watch?v=";
 }

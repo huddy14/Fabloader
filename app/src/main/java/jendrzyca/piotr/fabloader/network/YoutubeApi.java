@@ -1,14 +1,6 @@
 package jendrzyca.piotr.fabloader.network;
 
-import com.google.api.services.youtube.YouTube;
-import com.google.api.services.youtube.model.SearchListResponse;
-import com.google.api.services.youtube.model.SearchResult;
-
-
-import java.util.List;
-
 import jendrzyca.piotr.fabloader.model.youtube.YoutubeRespones;
-import retrofit2.Callback;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;

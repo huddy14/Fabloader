@@ -1,5 +1,7 @@
 package jendrzyca.piotr.fabloader.di.components;
 
+import android.app.DownloadManager;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -16,9 +18,11 @@ import retrofit2.Retrofit;
 @Component(modules = {AppModule.class, NetworkModule.class})
 public interface NetworkComponent {
 
-    //@Named("RetrofitYoutube")
+    @Named("RetrofitYoutube")
     Retrofit retrofit();
 
-//    @Named("RetrofitConventer")
-//    Retrofit RetrofitConventer();
+    @Named("RetrofitConventer")
+    Retrofit RetrofitConventer();
+
+    DownloadManager downloadManager();
 }

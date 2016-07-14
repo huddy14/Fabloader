@@ -59,6 +59,8 @@ dependencies {
     //Appache common
     compile 'org.apache.commons:commons-lang3:3.4'
 
+    //custom progress bar
+    compile 'com.mikhaellopez:circularfillableloaders:1.2.0'
 
 
 }

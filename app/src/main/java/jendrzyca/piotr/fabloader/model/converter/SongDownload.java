@@ -5,21 +5,21 @@ package jendrzyca.piotr.fabloader.model.converter;
  */
 public class SongDownload {
     private long length;
-    private String tittle;
+    private String title;
     private String link;
 
-    public SongDownload(String tittle, long length, String link) {
+    public SongDownload(String title, long length, String link) {
         this.length = length;
         this.link = link;
-        this.tittle = tittle;
+        this.title = title;
     }
 
     public long getLength() {
         return length;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
     public String getLink() {

@@ -1,8 +1,9 @@
-package jendrzyca.piotr.fabloader.ui;
+package jendrzyca.piotr.fabloader.ui.presenters;
 
 
 import java.util.List;
 
+import jendrzyca.piotr.fabloader.model.converter.SongDownload;
 import jendrzyca.piotr.fabloader.model.youtube.Item;
 
 /**
@@ -13,9 +14,11 @@ public interface MainActivityPresenter {
     {
         void showResults(List<Item> songs);
 
-        void showError(String errMessage);
+        void onConverterResponse(SongDownload songDownload);
 
-        void showComplete();
+        void onError(String errMessage);
+
+        void onComplete();
     }
 
     interface Presenter

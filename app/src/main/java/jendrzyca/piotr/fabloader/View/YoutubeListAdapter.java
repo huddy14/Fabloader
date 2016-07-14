@@ -15,6 +15,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import jendrzyca.piotr.fabloader.R;
+import jendrzyca.piotr.fabloader.model.converter.SongDownload;
 import jendrzyca.piotr.fabloader.model.youtube.Item;
 
 /**
@@ -68,5 +69,9 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
     {
         songs = newSongList;
         notifyDataSetChanged();
+    }
+
+    public String getSongId(int positoin) {
+        return songs.get(positoin).getId().getVideoId();
     }
 }

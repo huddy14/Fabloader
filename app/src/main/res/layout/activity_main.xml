@@ -15,12 +15,11 @@
         android:id="@+id/rv">
     </android.support.v7.widget.RecyclerView>
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New RadioButton"
-        android:id="@+id/radioButton"
-        android:layout_alignTop="@+id/rv"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="175dp" />
+    <com.mikhaellopez.circularfillableloaders.CircularFillableLoaders
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:src="@drawable/loader"
+        android:id="@+id/loader"/>
+
 </RelativeLayout>

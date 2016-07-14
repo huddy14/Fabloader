@@ -27,8 +27,12 @@ public class RecyclerViewListener implements RecyclerView.OnItemTouchListener {
     @Override
     public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
         View childView = rv.findChildViewUnder(e.getX(), e.getY());
-        if (childView != null && listener != null && gestureDetector.onTouchEvent(e))
-            listener.onTouch(rv.getChildAdapterPosition(childView));
+        if (childView != null && listener != null && gestureDetector.onTouchEvent(e)) {
+            int position = rv.getChildAdapterPosition(childView);
+            YoutubeListAdapter adapter = (YoutubeListAdapter)rv.getAdapter();
+
+            listener.onTouch(adapter.getSongId(position));
+        }
         return false;
     }
 
@@ -43,6 +47,6 @@ public class RecyclerViewListener implements RecyclerView.OnItemTouchListener {
     }
 
     public interface SongItemEventListener {
-        void onTouch(int position);
+        void onTouch(String id);
     }
 }
