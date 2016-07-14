@@ -1,11 +1,15 @@
 package jendrzyca.piotr.fabloader.ui;
 
-import com.google.api.services.youtube.YouTube;
+import com.google.api.services.youtube.model.SearchListResponse;
+import com.google.api.services.youtube.model.SearchResult;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import jendrzyca.piotr.fabloader.MainActivity;
+import jendrzyca.piotr.fabloader.di.scopes.PerActivity;
+import jendrzyca.piotr.fabloader.model.youtube.YoutubeRespones;
 import jendrzyca.piotr.fabloader.network.YoutubeApi;
 import jendrzyca.piotr.fabloader.utils.Constants;
 import retrofit2.Retrofit;
@@ -19,23 +23,27 @@ import rx.schedulers.Schedulers;
 public class MainActivityPresenterImpl implements MainActivityPresenter.Presenter{
 
     private Retrofit retrofit;
+    //private Retrofit retrofitConverter;
     private MainActivityPresenter.View view;
-
+//
+//    @Named("RetrofitYoutube")Retrofit retrofitYoutube,
+//    @Named("RetrofitConverter")Retrofit retrofitConverter,
     @Inject
-    @Named("RetrofitYoutube")
-    public MainActivityPresenterImpl(Retrofit retrofit, MainActivityPresenter.View view)
+    public MainActivityPresenterImpl(Retrofit retrofit,
+                                     MainActivityPresenter.View view)
     {
         this.retrofit =retrofit;
+        //this.retrofitConverter = retrofitConverter;
         this.view = view;
     }
 
     @Override
     public void load(String query) {
         retrofit.create(YoutubeApi.class).searchSongs(Constants.YOUTUBE_PART,Constants.YOUTUBE_MAX_RESULTS
-        ,query,Constants.YOUTUBE_KEY).subscribeOn(Schedulers.io())
+        ,query,Constants.YOUTUBE_TYPE,Constants.YOUTUBE_KEY).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
-                .subscribe(new Observer<YouTube.Search.List>() {
+                .subscribe(new Observer<YoutubeRespones>() {
                     @Override
                     public void onCompleted() {
                         view.showComplete();
@@ -47,9 +55,14 @@ public class MainActivityPresenterImpl implements MainActivityPresenter.Presente
                     }
 
                     @Override
-                    public void onNext(YouTube.Search.List list) {
-                        view.showResults(list);
+                    public void onNext(YoutubeRespones list) {
+                        view.showResults(list.getItems());
                     }
                 });
+    }
+
+    @Override
+    public void download(String id) {
+
     }
 }

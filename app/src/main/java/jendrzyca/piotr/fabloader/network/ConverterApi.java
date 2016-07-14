@@ -1,8 +1,6 @@
 package jendrzyca.piotr.fabloader.network;
 
-import jendrzyca.piotr.fabloader.data.model.SongDownload;
-import jendrzyca.piotr.fabloader.utils.Constants;
-import retrofit2.Callback;
+import jendrzyca.piotr.fabloader.model.converter.SongDownload;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;

@@ -1,4 +1,4 @@
-package jendrzyca.piotr.fabloader.data.model;
+package jendrzyca.piotr.fabloader.model.converter;
 
 /**
  * Created by huddy on 7/13/16.

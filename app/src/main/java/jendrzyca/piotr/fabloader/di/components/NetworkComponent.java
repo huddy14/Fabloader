@@ -6,19 +6,19 @@ import javax.inject.Singleton;
 import dagger.Component;
 import jendrzyca.piotr.fabloader.di.modules.AppModule;
 import jendrzyca.piotr.fabloader.di.modules.NetworkModule;
+import jendrzyca.piotr.fabloader.di.scopes.PerActivity;
 import retrofit2.Retrofit;
 
 /**
  * Created by huddy on 7/13/16.
  */
-
 @Singleton
 @Component(modules = {AppModule.class, NetworkModule.class})
 public interface NetworkComponent {
 
-    @Named("RetrofitYoutube")
-    Retrofit RetrofitYoutube();
+    //@Named("RetrofitYoutube")
+    Retrofit retrofit();
 
-    @Named("RetrofitConventer")
-    Retrofit RetrofitConventer();
+//    @Named("RetrofitConventer")
+//    Retrofit RetrofitConventer();
 }

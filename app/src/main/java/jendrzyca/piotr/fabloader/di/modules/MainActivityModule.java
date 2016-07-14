@@ -1,5 +1,7 @@
 package jendrzyca.piotr.fabloader.di.modules;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import jendrzyca.piotr.fabloader.di.scopes.PerActivity;

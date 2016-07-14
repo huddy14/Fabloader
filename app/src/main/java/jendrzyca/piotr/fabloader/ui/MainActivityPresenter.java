@@ -1,8 +1,9 @@
 package jendrzyca.piotr.fabloader.ui;
 
-import com.google.api.services.youtube.YouTube;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import jendrzyca.piotr.fabloader.model.youtube.Item;
 
 /**
  * Created by huddy on 7/13/16.
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 public interface MainActivityPresenter {
     interface View
     {
-        void showResults(YouTube.Search.List songs);
+        void showResults(List<Item> songs);
 
         void showError(String errMessage);
 
@@ -20,5 +21,7 @@ public interface MainActivityPresenter {
     interface Presenter
     {
         void load(String query);
+
+        void download(String id);
     }
 }
