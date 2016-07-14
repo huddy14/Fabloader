@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Bind(R.id.rv)RecyclerView rc;
     @Bind(R.id.loader)CircularFillableLoaders progress;
 
+    SearchView searchView;
+
     YoutubeListAdapter adapter;
 
     @Override
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         getMenuInflater().inflate(R.menu.search_menu, menu);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         MenuItem searchItem = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setSubmitButtonEnabled(true);
         searchView.setOnQueryTextListener(this);
@@ -103,6 +105,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         //właczenie progress baru
         presenter.load(query);
 
+        //schowanie klawiatury
+        searchView.clearFocus();
         displayProgress();
 
         return true;
@@ -138,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public void onError(String errMessage) {
         displaySonglist();
-        showMessage(errMessage);
+        showMessage(getString(R.string.error_download));
     }
 
     @Override

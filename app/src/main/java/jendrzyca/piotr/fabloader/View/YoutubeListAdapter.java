@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -45,6 +48,8 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
         Picasso.with(context)
                 .load(songs.get(position).getSnippet().getThumbnails().getDefault().getUrl())
                 .into(holder.thumbnail);
+        String date = songs.get(position).getSnippet().getPublishedAt();
+        holder.pubDate.setText(parseDate(date));
     }
 
     @Override
@@ -58,6 +63,7 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
         @Bind(R.id.descriptionTV) TextView description;
         @Bind(R.id.tittleTV)TextView tittle;
         @Bind(R.id.thumbnail)ImageView thumbnail;
+        @Bind(R.id.pubDate)TextView pubDate;
 
         public YoutubeItemViewHolder(View itemView) {
             super(itemView);
@@ -73,5 +79,19 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
 
     public String getSongId(int positoin) {
         return songs.get(positoin).getId().getVideoId();
+    }
+
+    private String parseDate(String date)
+    {
+        Date d;
+        try {
+            d= new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(date);
+        }
+        catch (ParseException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+        return new SimpleDateFormat("k:m, dd/MM/yyyy").format(d);
     }
 }
