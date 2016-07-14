@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Fabloader</string>
+    <string name="communicate_fabuje">FABUUUUJĘ...\\n</string>
+    <string name="error_download">Takiego gonwa nie pobieramy</string>
 </resources>

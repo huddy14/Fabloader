@@ -11,15 +11,10 @@ import android.view.View;
  */
 public class RecyclerViewListener implements RecyclerView.OnItemTouchListener {
 
-    public interface SongItemEventListener
-    {
-        void onTouch(int position);
-    }
     private GestureDetector gestureDetector;
     private SongItemEventListener listener;
 
-    public RecyclerViewListener(Context context, SongItemEventListener listener)
-    {
+    public RecyclerViewListener(Context context, SongItemEventListener listener) {
         gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
@@ -31,9 +26,13 @@ public class RecyclerViewListener implements RecyclerView.OnItemTouchListener {
 
     @Override
     public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-        View childView = rv.findChildViewUnder(e.getX(),e.getY());
-        if(childView!= null && listener != null && gestureDetector.onTouchEvent(e))
-            listener.onTouch(rv.getChildAdapterPosition(childView));
+        View childView = rv.findChildViewUnder(e.getX(), e.getY());
+        if (childView != null && listener != null && gestureDetector.onTouchEvent(e)) {
+            int position = rv.getChildAdapterPosition(childView);
+            YoutubeListAdapter adapter = (YoutubeListAdapter)rv.getAdapter();
+
+            listener.onTouch(adapter.getSongId(position));
+        }
         return false;
     }
 
@@ -45,5 +44,9 @@ public class RecyclerViewListener implements RecyclerView.OnItemTouchListener {
     @Override
     public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
+    }
+
+    public interface SongItemEventListener {
+        void onTouch(String id);
     }
 }

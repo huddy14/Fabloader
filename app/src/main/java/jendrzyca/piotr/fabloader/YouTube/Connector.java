@@ -31,31 +31,31 @@ public class Connector {
     private YouTube youtube;
     private YouTube.Search.List query;
 
+
+
     private Context context;
 
-    public Connector(Context context)
-    {
+    public Connector(Context context) {
         this.context = context;
 
         youtube = new YouTube.Builder(new NetHttpTransport(),
                 new JacksonFactory(), new HttpRequestInitializer() {
             @Override
-            public void initialize(HttpRequest hr) throws IOException {}
+            public void initialize(HttpRequest hr) throws IOException {
+            }
         }).setApplicationName(context.getString(R.string.app_name)).build();
 
-        try{
+        try {
             query = youtube.search().list(LIST_ELEMENTS);
             query.setKey(API_KEY);
             query.setType(TYPE);
             query.setFields(FIELDS);
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             Log.d("YC", "Could not initialize: " + e);
         }
     }
 
-    public ArrayList<Item> search(String keywords)
-    {
+    public ArrayList<Item> search(String keywords) {
         query.setQ(keywords);
         query.setMaxResults(30L);
 
@@ -67,8 +67,7 @@ public class Connector {
             List<SearchResult> results = response.getItems();
 
 
-            for(SearchResult result : results)
-            {
+            for (SearchResult result : results) {
                 Item item = new Item();
 
                 item.setId(result.getId().getVideoId());
