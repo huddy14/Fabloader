@@ -1,4 +1,4 @@
-package jendrzyca.piotr.fabloader.View;
+package jendrzyca.piotr.fabloader.ui.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +18,6 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import jendrzyca.piotr.fabloader.R;
-import jendrzyca.piotr.fabloader.model.converter.SongDownload;
 import jendrzyca.piotr.fabloader.model.youtube.Item;
 
 /**

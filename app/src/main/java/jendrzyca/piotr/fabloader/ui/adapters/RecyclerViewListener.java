@@ -1,4 +1,4 @@
-package jendrzyca.piotr.fabloader.View;
+package jendrzyca.piotr.fabloader.ui.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

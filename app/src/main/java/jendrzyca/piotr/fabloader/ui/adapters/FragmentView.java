@@ -1,4 +1,4 @@
-package jendrzyca.piotr.fabloader.View;
+package jendrzyca.piotr.fabloader.ui.adapters;
 
 import android.support.v4.app.Fragment;
 
