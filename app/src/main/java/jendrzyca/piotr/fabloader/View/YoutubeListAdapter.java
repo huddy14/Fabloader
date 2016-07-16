@@ -46,7 +46,7 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
         holder.description.setText(songs.get(position).getSnippet().getDescription());
         holder.tittle.setText(songs.get(position).getSnippet().getTitle());
         Picasso.with(context)
-                .load(songs.get(position).getSnippet().getThumbnails().getDefault().getUrl())
+                .load(songs.get(position).getSnippet().getThumbnails().getMedium().getUrl())
                 .fit()
                 .into(holder.thumbnail);
         String date = songs.get(position).getSnippet().getPublishedAt();
