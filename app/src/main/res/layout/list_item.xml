@@ -11,67 +11,134 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/cardview_margin">
-        <!--card_view:cardCornerRadius="20dp"-->
+        card_view:cardCornerRadius="20dp"
         <!--card_view:contentPadding="10dp">-->
-
-
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="200dp"
+                    android:id="@+id/thumbnail"
+                    android:background="@drawable/loader"
+                    android:layout_margin="5dp"
+                    android:scaleType="fitStart"
+                    android:adjustViewBounds="true"
+                    />
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="200dp"
+                    android:background="#000"
+                    android:alpha="0.7"
+                    android:layout_margin="5dp" />
+                <TextView
+                    android:id="@+id/tittleTV"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textAlignment="gravity"
+                    android:text="Tytual piosekek"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:layout_margin="20dp"
+                    android:textSize="17dp" />
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/descriptionTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:layout_below="@+id/tittleTV"
+                android:text="dsfasdfasfasdf sadfasdf asdfasddasf asd f asdsadfasdfasfa"
+                android:padding="10dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_weight="1">
 
-                <ImageView
+                <Button
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/thumbnail" />
+                    android:layout_height="wrap_content"
+                    android:id="@+id/download"
+                    android:paddingTop="8dp"
+                    android:text="download"
+                    android:textStyle="bold"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_weight="1" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/list_item_padding"
-                    android:orientation="vertical">
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="fill_vertical">
 
                     <TextView
-                        android:id="@+id/tittleTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:gravity="left"
-                        android:textAlignment="gravity"
-                        android:layout_alignParentTop="true"/>
+                        android:layout_height="fill_parent"
+                        android:id="@+id/duration"
+                        android:paddingTop="@dimen/list_item_padding"
+                        android:text="4M 13S"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="fill_parent"
+                        android:layout_marginTop="-5dp"
+                        android:textColor="@color/colorPrimaryDark" />
 
                     <TextView
-                        android:id="@+id/descriptionTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/description_layout_margin"
-                        android:maxLines="2"
-                        android:layout_below="@+id/tittleTV"/>
+                        android:layout_height="fill_parent"
+                        android:paddingTop="@dimen/list_item_padding"
+                        android:text="DURATION"
+                        android:layout_width="fill_parent"
+                        android:textSize="10dp"
+                        android:gravity="center"
+                        android:layout_marginTop="-25dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="fill_vertical">
+
+                    <TextView
+                        android:layout_height="fill_parent"
+                        android:id="@+id/pubDate"
+                        android:paddingTop="@dimen/list_item_padding"
+                        android:text="12/07/2013"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="fill_parent"
+                        android:layout_marginTop="-5dp"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                    <TextView
+                        android:layout_height="fill_parent"
+                        android:paddingTop="@dimen/list_item_padding"
+                        android:text="PUBLISH DATE"
+                        android:layout_width="fill_parent"
+                        android:textSize="10dp"
+                        android:gravity="center"
+                        android:layout_marginTop="-25dp" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/pubDate"
-                android:paddingTop="@dimen/list_item_padding"
-                android:layout_gravity="right"
-                android:gravity="right"
-                android:textSize="@dimen/pubDate_text_size"
-                android:textAlignment="gravity"/>
-
-
-
         </LinearLayout>
     </android.support.v7.widget.CardView>
-
-
 </LinearLayout>

@@ -47,6 +47,7 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
         holder.tittle.setText(songs.get(position).getSnippet().getTitle());
         Picasso.with(context)
                 .load(songs.get(position).getSnippet().getThumbnails().getDefault().getUrl())
+                .fit()
                 .into(holder.thumbnail);
         String date = songs.get(position).getSnippet().getPublishedAt();
         holder.pubDate.setText(parseDate(date));
@@ -92,6 +93,6 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
             throw new RuntimeException(e);
         }
 
-        return new SimpleDateFormat("k:m, dd/MM/yyyy").format(d);
+        return new SimpleDateFormat("dd/MM/yyyy").format(d);
     }
 }
