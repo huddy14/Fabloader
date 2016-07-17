@@ -13,6 +13,8 @@ import com.squareup.picasso.Picasso;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,12 +52,17 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
 
     @Override
     public void onBindViewHolder(YoutubeItemViewHolder holder, int position) {
-        holder.description.setText(songs.get(position).getDescription());
         holder.tittle.setText(songs.get(position).getTittle());
         Picasso.with(context)
                 .load(songs.get(position).getThumbnailUrl())
                 .fit()
                 .into(holder.thumbnail);
+
+        holder.like.setText(numberWithSpaces(songs.get(position).getStatistics().getLikeCount()));
+        holder.dislike.setText(numberWithSpaces(songs.get(position).getStatistics().getDislikeCount()));
+        holder.views.setText(numberWithSpaces(songs.get(position).getStatistics().getViewCount()));
+
+        holder.description.setText(songs.get(position).getDescription());
         String date = songs.get(position).getPublishedAt();
         holder.pubDate.setText(parseDate(date));
         holder.duration.setText(parseTime(songs.get(position).getStatistics().getDuration()));
@@ -64,6 +71,19 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
         //holder.imageArea.setOnClickListener(mainActivity);
     }
 
+    }
+    private String numberWithSpaces(int x) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator(' ');
+
+        DecimalFormat df = new DecimalFormat();
+        df.setDecimalFormatSymbols(symbols);
+        df.setGroupingSize(3);
+        df.setMaximumFractionDigits(2);
+        return df.format(x);
+        //return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        //return String.valueOf(x).replace("/\\B(?=(\\d{3})+(?!\\d))/g", " ");
+    }
 
     @Override
     public int getItemCount() {
@@ -79,7 +99,9 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
         @Bind(R.id.thumbnail)ImageView thumbnail;
         @Bind(R.id.pubDate)TextView pubDate;
         @Bind(R.id.duration)TextView duration;
-        @Bind(R.id.image_area)RelativeLayout imageArea;
+        @Bind(R.id.likeTV)TextView like;
+        @Bind(R.id.dislikeTV)TextView dislike;
+        @Bind(R.id.viewsTV)TextView views;
 
         public YoutubeItemViewHolder(View itemView) {
             super(itemView);
@@ -115,8 +137,8 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
         return new SimpleDateFormat("dd/MM/yyyy").format(d);
     }
 
-    //// TODO: 7/17/16 spacje wrzucic dla czytelnosci
+    //// TODO: 7/17/16 spacje wrzucic dla czytelnosci7 - zrobione: Michal
     private String parseTime(String duration) {
-        return duration.substring(2);
+        return duration.substring(2).replace("M", "M ");
     }
 }
