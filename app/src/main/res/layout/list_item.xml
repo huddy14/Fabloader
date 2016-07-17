@@ -64,6 +64,97 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="bottom">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="fill_vertical" >
+
+                    <TextView
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/likeTV"
+                        android:paddingTop="@dimen/list_item_padding"
+                        android:text="12564"
+                        android:layout_width="fill_parent"
+                        android:layout_marginTop="@dimen/duration_margin_top"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                    <TextView
+                        android:layout_height="fill_parent"
+                        android:paddingTop="@dimen/list_item_padding"
+                        android:text="LIKE"
+                        android:layout_width="fill_parent"
+                        android:textSize="@dimen/duration_text_size"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/duration_margin" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="fill_vertical" >
+
+                    <TextView
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/dislikeTV"
+                        android:paddingTop="@dimen/list_item_padding"
+                        android:text="651"
+                        android:layout_width="fill_parent"
+                        android:layout_marginTop="@dimen/duration_margin_top"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                    <TextView
+                        android:layout_height="fill_parent"
+                        android:paddingTop="@dimen/list_item_padding"
+                        android:text="DISLIKE"
+                        android:layout_width="fill_parent"
+                        android:textSize="@dimen/duration_text_size"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/duration_margin" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="fill_vertical" >
+
+                    <TextView
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/viewsTV"
+                        android:paddingTop="@dimen/list_item_padding"
+                        android:text="51 852 515 550"
+                        android:layout_width="fill_parent"
+                        android:layout_marginTop="@dimen/duration_margin_top"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                    <TextView
+                        android:layout_height="fill_parent"
+                        android:paddingTop="@dimen/list_item_padding"
+                        android:text="VIEWS"
+                        android:layout_width="fill_parent"
+                        android:textSize="@dimen/duration_text_size"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/duration_margin" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_weight="1">
