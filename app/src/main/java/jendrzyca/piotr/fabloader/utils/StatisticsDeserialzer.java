@@ -26,11 +26,11 @@ public class StatisticsDeserialzer implements JsonDeserializer<StatisticsList> {
 
         for (JsonElement je : items) {
 
-            int viewCount = 0;
-            int likeCount = 0;
-            int dislikeCount = 0;
-            int favoriteCount = 0;
-            int commentCount = 0;
+            String viewCount;
+            String likeCount;
+            String dislikeCount;
+            String favoriteCount;
+            String commentCount;
             String id = je.getAsJsonObject().get("id").getAsString();
             JsonElement contentDetails = je.getAsJsonObject().get("contentDetails");
 
@@ -38,15 +38,15 @@ public class StatisticsDeserialzer implements JsonDeserializer<StatisticsList> {
 
             try {
                 JsonElement statistics = je.getAsJsonObject().get("statistics");
-                viewCount = statistics.getAsJsonObject().get("viewCount").getAsInt();
-                likeCount = statistics.getAsJsonObject().get("likeCount").getAsInt();
-                dislikeCount = statistics.getAsJsonObject().get("dislikeCount").getAsInt();
-                favoriteCount = statistics.getAsJsonObject().get("favoriteCount").getAsInt();
-                commentCount = statistics.getAsJsonObject().get("commentCount").getAsInt();
+                viewCount = statistics.getAsJsonObject().get("viewCount").getAsString();
+                likeCount = statistics.getAsJsonObject().get("likeCount").getAsString();
+                dislikeCount = statistics.getAsJsonObject().get("dislikeCount").getAsString();
+                favoriteCount = statistics.getAsJsonObject().get("favoriteCount").getAsString();
+                commentCount = statistics.getAsJsonObject().get("commentCount").getAsString();
             }
             catch (Exception e)
             {
-                throw new RuntimeException(e);
+                throw new RuntimeException();
             }
 
             Statistics videoStatiscics = new Statistics(id, duration, viewCount, likeCount, dislikeCount, favoriteCount, commentCount);

@@ -2,18 +2,21 @@ package jendrzyca.piotr.fabloader.model.youtube.video_details;
 
 /**
  * Created by Piotr Jendrzyca on 7/17/16.
- *
- * Class to contain statistics for a video
  */
 public class Statistics {
 
     private String id;
     private String duration;
-    private int viewCount;
-    private int likeCount;
-    private int dislikeCount;
+    private String viewCount;
+    private String likeCount;
+    private String dislikeCount;
+    private String favoriteCount;
+    private String commentCount;
 
-    public Statistics(String id, String duration, int viewCount, int likeCount, int dislikeCount, int favoriteCount, int commentCount) {
+    public Statistics() {
+    }
+
+    public Statistics(String id, String duration, String viewCount, String likeCount, String dislikeCount, String favoriteCount, String commentCount) {
         this.id = id;
         this.duration = duration;
         this.viewCount = viewCount;
@@ -22,14 +25,6 @@ public class Statistics {
         this.favoriteCount = favoriteCount;
         this.commentCount = commentCount;
     }
-
-    public Statistics() {
-
-    }
-
-    private int favoriteCount;
-    private int commentCount;
-
 
     public String getId() {
         return id;
@@ -47,43 +42,43 @@ public class Statistics {
         this.duration = duration;
     }
 
-    public int getViewCount() {
+    public String getViewCount() {
         return viewCount;
     }
 
-    public void setViewCount(int viewCount) {
+    public void setViewCount(String viewCount) {
         this.viewCount = viewCount;
     }
 
-    public int getLikeCount() {
+    public String getLikeCount() {
         return likeCount;
     }
 
-    public void setLikeCount(int likeCount) {
+    public void setLikeCount(String likeCount) {
         this.likeCount = likeCount;
     }
 
-    public int getDislikeCount() {
+    public String getDislikeCount() {
         return dislikeCount;
     }
 
-    public void setDislikeCount(int dislikeCount) {
+    public void setDislikeCount(String dislikeCount) {
         this.dislikeCount = dislikeCount;
     }
 
-    public int getFavoriteCount() {
+    public String getFavoriteCount() {
         return favoriteCount;
     }
 
-    public void setFavoriteCount(int favoriteCount) {
+    public void setFavoriteCount(String favoriteCount) {
         this.favoriteCount = favoriteCount;
     }
 
-    public int getCommentCount() {
+    public String getCommentCount() {
         return commentCount;
     }
 
-    public void setCommentCount(int commentCount) {
+    public void setCommentCount(String commentCount) {
         this.commentCount = commentCount;
     }
 }

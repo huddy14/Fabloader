@@ -102,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+        rc.smoothScrollToPosition(0);
+
         //właczenie progress baru
         presenter.load(query);
 
@@ -122,14 +124,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public void onTouch(String id, String tittle) {
         presenter.download(id, tittle);
-
-
         displayProgress();
     }
 
 
     @Override
     public void showResults(List<Item> songs) {
+
         adapter.update(songs);
 
         displaySonglist();

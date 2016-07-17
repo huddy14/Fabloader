@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
+import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
@@ -71,8 +72,9 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
         //holder.imageArea.setOnClickListener(mainActivity);
     }
 
-    }
-    private String numberWithSpaces(int x) {
+
+    private String numberWithSpaces(String x) {
+        Long number = Long.parseLong(x);
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setGroupingSeparator(' ');
 
@@ -80,7 +82,7 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
         df.setDecimalFormatSymbols(symbols);
         df.setGroupingSize(3);
         df.setMaximumFractionDigits(2);
-        return df.format(x);
+        return df.format(number);
         //return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         //return String.valueOf(x).replace("/\\B(?=(\\d{3})+(?!\\d))/g", " ");
     }
@@ -113,6 +115,7 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
     {
         songs = newSongList;
         notifyDataSetChanged();
+
     }
 
     public String getSongId(int positoin) {
