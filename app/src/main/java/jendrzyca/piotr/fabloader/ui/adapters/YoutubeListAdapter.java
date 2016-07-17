@@ -10,10 +10,14 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.apache.commons.lang3.time.DurationFormatUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import javax.xml.datatype.Duration;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -42,15 +46,17 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
 
     @Override
     public void onBindViewHolder(YoutubeItemViewHolder holder, int position) {
-        holder.description.setText(songs.get(position).getSnippet().getDescription());
-        holder.tittle.setText(songs.get(position).getSnippet().getTitle());
+        holder.description.setText(songs.get(position).getDescription());
+        holder.tittle.setText(songs.get(position).getTittle());
         Picasso.with(context)
-                .load(songs.get(position).getSnippet().getThumbnails().getMedium().getUrl())
+                .load(songs.get(position).getThumbnailUrl())
                 .fit()
                 .into(holder.thumbnail);
-        String date = songs.get(position).getSnippet().getPublishedAt();
+        String date = songs.get(position).getPublishedAt();
         holder.pubDate.setText(parseDate(date));
+        holder.duration.setText(parseTime(songs.get(position).getStatistics().getDuration()));
     }
+
 
     @Override
     public int getItemCount() {
@@ -65,6 +71,7 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
         @Bind(R.id.tittleTV)TextView tittle;
         @Bind(R.id.thumbnail)ImageView thumbnail;
         @Bind(R.id.pubDate)TextView pubDate;
+        @Bind(R.id.duration)TextView duration;
 
         public YoutubeItemViewHolder(View itemView) {
             super(itemView);
@@ -79,11 +86,11 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
     }
 
     public String getSongId(int positoin) {
-        return songs.get(positoin).getId().getVideoId();
+        return songs.get(positoin).getId();
     }
 
     public String getSongTittle(int position) {
-        return songs.get(position).getSnippet().getTitle();
+        return songs.get(position).getTittle();
     }
 
     private String parseDate(String date)
@@ -98,5 +105,10 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
         }
 
         return new SimpleDateFormat("dd/MM/yyyy").format(d);
+    }
+
+    //// TODO: 7/17/16 spacje wrzucic dla czytelnosci
+    private String parseTime(String duration) {
+        return duration.substring(2);
     }
 }

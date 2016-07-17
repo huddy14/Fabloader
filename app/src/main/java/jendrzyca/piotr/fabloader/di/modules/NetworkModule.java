@@ -14,8 +14,11 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import jendrzyca.piotr.fabloader.model.youtube.search_list.YoutubeRespones;
 import jendrzyca.piotr.fabloader.model.youtube.video_details.Statistics;
+import jendrzyca.piotr.fabloader.model.youtube.video_details.StatisticsList;
 import jendrzyca.piotr.fabloader.model.youtube_dl.Formats;
+import jendrzyca.piotr.fabloader.utils.SearchDeserializer;
 import jendrzyca.piotr.fabloader.utils.StatisticsDeserialzer;
 import jendrzyca.piotr.fabloader.utils.YoutubeDlDeserializer;
 import okhttp3.Cache;
@@ -74,24 +77,49 @@ public class NetworkModule {
     public Gson provideGsonForVideoContent() {
         GsonBuilder gsonBuilder = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                .registerTypeAdapter(Statistics.class, new StatisticsDeserialzer());
+                .registerTypeAdapter(StatisticsList.class, new StatisticsDeserialzer());
 
         return gsonBuilder.create();
     }
 
     @Provides
     @Singleton
+    @Named("GsonYoutubeSearch")
+    public Gson provideGsonForYoutubeSearch() {
+        GsonBuilder gsonBuilder = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .registerTypeAdapter(YoutubeRespones.class, new SearchDeserializer());
+
+        return gsonBuilder.create();
+    }
+
+    //// TODO: 7/17/16 try to have only one instance of retrofityoutube with multiple converters
+    @Provides
+    @Singleton
     @Named("RetrofitYoutube")
-    public Retrofit provideRetrofitYoutube(@Named("GsonVideoContent") Gson gson, OkHttpClient client) {
+    public Retrofit provideRetrofitYoutube(@Named("GsonYoutubeSearch") Gson gson, OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(BASE_URL_YOUTUBE)
                 .client(client)
-                //.addConverterFactory(JacksonConverterFactory.create(new ObjectMapper()))
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         return retrofit;
 
+    }
+
+    @Provides
+    @Singleton
+    @Named("RetrofitVideoDetails")
+    public Retrofit provideRetrofitVideoDetails(@Named("GsonVideoContent") Gson gson, OkHttpClient client)
+    {
+        Retrofit retrofit = new Retrofit.Builder()
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(BASE_URL_YOUTUBE)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        return retrofit;
     }
 
     @Provides

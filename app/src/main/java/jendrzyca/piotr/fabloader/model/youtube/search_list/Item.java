@@ -1,136 +1,72 @@
 package jendrzyca.piotr.fabloader.model.youtube.search_list;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import jendrzyca.piotr.fabloader.model.youtube.video_details.Statistics;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.Generated;
-
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@Generated("org.jsonschema2pojo")
-@JsonPropertyOrder({
-        "kind",
-        "etag",
-        "id",
-        "snippet"
-})
 public class Item {
 
-    @JsonProperty("kind")
-    private String kind;
-    @JsonProperty("etag")
-    private String etag;
-    @JsonProperty("id")
-    private Id id;
-    @JsonProperty("snippet")
-    private Snippet snippet;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private String id;
+    private String publishedAt;
+    private String tittle;
+    private String description;
+    private String thumbnailUrl;
+    private Statistics statistics;
 
-    /**
-     * @return The kind
-     */
-    @JsonProperty("kind")
-    public String getKind() {
-        return kind;
+    public Item(String id, String publishedAt, String tittle, String description, String thumbnailUrl) {
+        this.id = id;
+        this.publishedAt = publishedAt;
+        this.tittle = tittle;
+        this.description = description;
+        this.thumbnailUrl = thumbnailUrl;
     }
 
-    /**
-     * @param kind The kind
-     */
-    @JsonProperty("kind")
-    public void setKind(String kind) {
-        this.kind = kind;
+    public Item() {
     }
 
-    /**
-     * @return The etag
-     */
-    @JsonProperty("etag")
-    public String getEtag() {
-        return etag;
-    }
-
-    /**
-     * @param etag The etag
-     */
-    @JsonProperty("etag")
-    public void setEtag(String etag) {
-        this.etag = etag;
-    }
-
-    /**
-     * @return The id
-     */
-    @JsonProperty("id")
-    public Id getId() {
+    public String getId() {
         return id;
     }
 
-    /**
-     * @param id The id
-     */
-    @JsonProperty("id")
-    public void setId(Id id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    /**
-     * @return The snippet
-     */
-    @JsonProperty("snippet")
-    public Snippet getSnippet() {
-        return snippet;
+    public String getPublishedAt() {
+        return publishedAt;
     }
 
-    /**
-     * @param snippet The snippet
-     */
-    @JsonProperty("snippet")
-    public void setSnippet(Snippet snippet) {
-        this.snippet = snippet;
+    public void setPublishedAt(String publishedAt) {
+        this.publishedAt = publishedAt;
     }
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+    public String getTittle() {
+        return tittle;
     }
 
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
+    public void setTittle(String tittle) {
+        this.tittle = tittle;
     }
 
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    public String getDescription() {
+        return description;
     }
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder().append(kind).append(etag).append(id).append(snippet).append(additionalProperties).toHashCode();
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof Item) == false) {
-            return false;
-        }
-        Item rhs = ((Item) other);
-        return new EqualsBuilder().append(kind, rhs.kind).append(etag, rhs.etag).append(id, rhs.id).append(snippet, rhs.snippet).append(additionalProperties, rhs.additionalProperties).isEquals();
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public Statistics getStatistics() {
+        return statistics;
+    }
+
+    public void setStatistics(Statistics statistics) {
+        this.statistics = statistics;
+    }
 }

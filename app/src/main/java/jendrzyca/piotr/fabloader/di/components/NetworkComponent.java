@@ -24,5 +24,8 @@ public interface NetworkComponent {
     @Named("RetrofitDownloader")
     Retrofit retrofitDownloader();
 
+    @Named("RetrofitVideoDetails")
+    Retrofit retrofitVideoDetails();
+
     DownloadManager downloadManager();
 }

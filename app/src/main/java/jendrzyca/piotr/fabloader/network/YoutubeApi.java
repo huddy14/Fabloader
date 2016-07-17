@@ -1,7 +1,7 @@
 package jendrzyca.piotr.fabloader.network;
 
 import jendrzyca.piotr.fabloader.model.youtube.search_list.YoutubeRespones;
-import jendrzyca.piotr.fabloader.model.youtube.video_details.Statistics;
+import jendrzyca.piotr.fabloader.model.youtube.video_details.StatisticsList;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -18,9 +18,9 @@ public interface YoutubeApi {
     String PART_STATISTICS = "contentDetails,statistics";
 
     @GET("/youtube/v3/search")
-    Observable<YoutubeRespones> searchSongs(@Query("part") String part, @Query("maxResults") String maxResults ,
+    Observable<YoutubeRespones> searchSongs(@Query("part") String part, @Query("maxResults") String maxResults,
                                             @Query("q") String query, @Query("type") String type, @Query("key") String key);
 
     @GET("/youtube/v3/videos")
-    Observable<Statistics> videoStatisctics(@Query("part") String part, @Query("id") String id, @Query("key")String key);
+    Observable<StatisticsList> videoStatisctics(@Query("part") String part, @Query("id") String id, @Query("key") String key);
 }
