@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private void initializeRecyclerView() {
         rc.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new YoutubeListAdapter(new ArrayList<Item>());
+        adapter = new YoutubeListAdapter(new ArrayList<Item>(),this);
 
         rc.setAdapter(adapter);
 
@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public void onTouch(String id, String tittle) {
         presenter.download(id, tittle);
+
 
         displayProgress();
     }

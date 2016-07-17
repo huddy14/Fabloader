@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import jendrzyca.piotr.fabloader.model.youtube.search_list.Item;
-import jendrzyca.piotr.fabloader.model.youtube.search_list.YoutubeRespones;
+import jendrzyca.piotr.fabloader.model.youtube.search_list.ItemList;
 import jendrzyca.piotr.fabloader.model.youtube.video_details.Statistics;
 import jendrzyca.piotr.fabloader.model.youtube.video_details.StatisticsList;
 import jendrzyca.piotr.fabloader.model.youtube_dl.Formats;
@@ -57,7 +57,7 @@ public class MainActivityPresenterImpl implements MainActivityPresenter.Presente
                 , query, YoutubeApi.TYPE, YoutubeApi.KEY).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
-                .subscribe(new Observer<YoutubeRespones>() {
+                .subscribe(new Observer<ItemList>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -68,7 +68,7 @@ public class MainActivityPresenterImpl implements MainActivityPresenter.Presente
                     }
 
                     @Override
-                    public void onNext(YoutubeRespones list) {
+                    public void onNext(ItemList list) {
 
                         youtubeItems = list.getItems();
 

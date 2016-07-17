@@ -5,10 +5,10 @@ import java.util.List;
 
 import jendrzyca.piotr.fabloader.model.youtube.video_details.Statistics;
 
-public class YoutubeRespones {
+public class ItemList {
     private List<Item> items;
 
-    public YoutubeRespones(List<Item> items) {
+    public ItemList(List<Item> items) {
         this.items = items;
     }
 

@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jendrzyca.piotr.fabloader.model.youtube.search_list.Item;
-import jendrzyca.piotr.fabloader.model.youtube.search_list.YoutubeRespones;
+import jendrzyca.piotr.fabloader.model.youtube.search_list.ItemList;
 
 /**
  * Created by Piotr Jendrzyca on 7/17/16.
  */
-public class SearchDeserializer implements JsonDeserializer<YoutubeRespones> {
+public class SearchDeserializer implements JsonDeserializer<ItemList> {
 
     @Override
-    public YoutubeRespones deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public ItemList deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         List<Item> itemzz = new ArrayList<>();
 
         JsonArray items = json.getAsJsonObject().get("items").getAsJsonArray();
@@ -45,6 +45,6 @@ public class SearchDeserializer implements JsonDeserializer<YoutubeRespones> {
             itemzz.add(newItem);
         }
 
-        return new YoutubeRespones(itemzz);
+        return new ItemList(itemzz);
     }
 }

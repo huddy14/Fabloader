@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -23,6 +24,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import jendrzyca.piotr.fabloader.R;
 import jendrzyca.piotr.fabloader.model.youtube.search_list.Item;
+import jendrzyca.piotr.fabloader.ui.MainActivity;
 
 /**
  * Created by huddy on 7/9/16.
@@ -31,8 +33,10 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
 
     private Context context;
     private List<Item> songs;
+    private MainActivity mainActivity;
 
-    public YoutubeListAdapter(List<Item> songs) {
+    public YoutubeListAdapter(List<Item> songs, MainActivity mainActivity) {
+        this.mainActivity= mainActivity;
         this.songs = songs;
     }
 
@@ -55,6 +59,9 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
         String date = songs.get(position).getPublishedAt();
         holder.pubDate.setText(parseDate(date));
         holder.duration.setText(parseTime(songs.get(position).getStatistics().getDuration()));
+
+        // handling image area click
+        //holder.imageArea.setOnClickListener(mainActivity);
     }
 
 
@@ -72,6 +79,7 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
         @Bind(R.id.thumbnail)ImageView thumbnail;
         @Bind(R.id.pubDate)TextView pubDate;
         @Bind(R.id.duration)TextView duration;
+        @Bind(R.id.image_area)RelativeLayout imageArea;
 
         public YoutubeItemViewHolder(View itemView) {
             super(itemView);

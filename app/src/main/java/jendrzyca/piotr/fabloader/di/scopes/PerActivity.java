@@ -8,6 +8,7 @@ import javax.inject.Scope;
 
 /**
  * Created by huddy on 7/13/16.
+ * Custom scopes for Dagger modules
  */
 @Documented
 @Scope

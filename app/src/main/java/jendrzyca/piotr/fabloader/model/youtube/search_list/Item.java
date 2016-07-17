@@ -2,6 +2,9 @@ package jendrzyca.piotr.fabloader.model.youtube.search_list;
 
 import jendrzyca.piotr.fabloader.model.youtube.video_details.Statistics;
 
+/**
+ * POJO for youtube search response
+ */
 public class Item {
 
     private String id;
