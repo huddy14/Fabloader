@@ -1,4 +1,4 @@
-package jendrzyca.piotr.fabloader.model.youtube;
+package jendrzyca.piotr.fabloader.model.youtube.search_list;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -20,20 +20,14 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 @JsonPropertyOrder({
         "kind",
-        "etag",
-        "id",
-        "snippet"
+        "videoId"
 })
-public class Item {
+public class Id {
 
     @JsonProperty("kind")
     private String kind;
-    @JsonProperty("etag")
-    private String etag;
-    @JsonProperty("id")
-    private Id id;
-    @JsonProperty("snippet")
-    private Snippet snippet;
+    @JsonProperty("videoId")
+    private String videoId;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -54,51 +48,19 @@ public class Item {
     }
 
     /**
-     * @return The etag
+     * @return The videoId
      */
-    @JsonProperty("etag")
-    public String getEtag() {
-        return etag;
+    @JsonProperty("videoId")
+    public String getVideoId() {
+        return videoId;
     }
 
     /**
-     * @param etag The etag
+     * @param videoId The videoId
      */
-    @JsonProperty("etag")
-    public void setEtag(String etag) {
-        this.etag = etag;
-    }
-
-    /**
-     * @return The id
-     */
-    @JsonProperty("id")
-    public Id getId() {
-        return id;
-    }
-
-    /**
-     * @param id The id
-     */
-    @JsonProperty("id")
-    public void setId(Id id) {
-        this.id = id;
-    }
-
-    /**
-     * @return The snippet
-     */
-    @JsonProperty("snippet")
-    public Snippet getSnippet() {
-        return snippet;
-    }
-
-    /**
-     * @param snippet The snippet
-     */
-    @JsonProperty("snippet")
-    public void setSnippet(Snippet snippet) {
-        this.snippet = snippet;
+    @JsonProperty("videoId")
+    public void setVideoId(String videoId) {
+        this.videoId = videoId;
     }
 
     @Override
@@ -118,7 +80,7 @@ public class Item {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(kind).append(etag).append(id).append(snippet).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(kind).append(videoId).append(additionalProperties).toHashCode();
     }
 
     @Override
@@ -126,11 +88,11 @@ public class Item {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Item) == false) {
+        if ((other instanceof Id) == false) {
             return false;
         }
-        Item rhs = ((Item) other);
-        return new EqualsBuilder().append(kind, rhs.kind).append(etag, rhs.etag).append(id, rhs.id).append(snippet, rhs.snippet).append(additionalProperties, rhs.additionalProperties).isEquals();
+        Id rhs = ((Id) other);
+        return new EqualsBuilder().append(kind, rhs.kind).append(videoId, rhs.videoId).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }

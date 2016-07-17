@@ -3,28 +3,25 @@ package jendrzyca.piotr.fabloader.ui.presenters;
 
 import java.util.List;
 
-import jendrzyca.piotr.fabloader.model.converter.SongDownload;
-import jendrzyca.piotr.fabloader.model.youtube.Item;
+import jendrzyca.piotr.fabloader.model.youtube.search_list.Item;
 
 /**
  * Created by huddy on 7/13/16.
  */
 public interface MainActivityPresenter {
-    interface View
-    {
+    interface View {
         void showResults(List<Item> songs);
 
-        void onConverterResponse(SongDownload songDownload);
+        void onConverterResponse();
 
         void onError(String errMessage);
 
         void onComplete();
     }
 
-    interface Presenter
-    {
+    interface Presenter {
         void load(String query);
 
-        void download(String id);
+        void download(String id, String tittle);
     }
 }

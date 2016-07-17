@@ -1,4 +1,4 @@
-package jendrzyca.piotr.fabloader.model.youtube;
+package jendrzyca.piotr.fabloader.model.youtube.search_list;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -19,48 +19,67 @@ import javax.annotation.Generated;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
 @JsonPropertyOrder({
-        "totalResults",
-        "resultsPerPage"
+        "url",
+        "width",
+        "height"
 })
-public class PageInfo {
+public class High {
 
-    @JsonProperty("totalResults")
-    private Integer totalResults;
-    @JsonProperty("resultsPerPage")
-    private Integer resultsPerPage;
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("width")
+    private Integer width;
+    @JsonProperty("height")
+    private Integer height;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
-     * @return The totalResults
+     * @return The url
      */
-    @JsonProperty("totalResults")
-    public Integer getTotalResults() {
-        return totalResults;
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
     }
 
     /**
-     * @param totalResults The totalResults
+     * @param url The url
      */
-    @JsonProperty("totalResults")
-    public void setTotalResults(Integer totalResults) {
-        this.totalResults = totalResults;
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     /**
-     * @return The resultsPerPage
+     * @return The width
      */
-    @JsonProperty("resultsPerPage")
-    public Integer getResultsPerPage() {
-        return resultsPerPage;
+    @JsonProperty("width")
+    public Integer getWidth() {
+        return width;
     }
 
     /**
-     * @param resultsPerPage The resultsPerPage
+     * @param width The width
      */
-    @JsonProperty("resultsPerPage")
-    public void setResultsPerPage(Integer resultsPerPage) {
-        this.resultsPerPage = resultsPerPage;
+    @JsonProperty("width")
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+
+    /**
+     * @return The height
+     */
+    @JsonProperty("height")
+    public Integer getHeight() {
+        return height;
+    }
+
+    /**
+     * @param height The height
+     */
+    @JsonProperty("height")
+    public void setHeight(Integer height) {
+        this.height = height;
     }
 
     @Override
@@ -80,7 +99,7 @@ public class PageInfo {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(totalResults).append(resultsPerPage).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(url).append(width).append(height).append(additionalProperties).toHashCode();
     }
 
     @Override
@@ -88,11 +107,11 @@ public class PageInfo {
         if (other == this) {
             return true;
         }
-        if ((other instanceof PageInfo) == false) {
+        if ((other instanceof High) == false) {
             return false;
         }
-        PageInfo rhs = ((PageInfo) other);
-        return new EqualsBuilder().append(totalResults, rhs.totalResults).append(resultsPerPage, rhs.resultsPerPage).append(additionalProperties, rhs.additionalProperties).isEquals();
+        High rhs = ((High) other);
+        return new EqualsBuilder().append(url, rhs.url).append(width, rhs.width).append(height, rhs.height).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }

@@ -1,4 +1,4 @@
-package jendrzyca.piotr.fabloader.model.youtube;
+package jendrzyca.piotr.fabloader.model.youtube.search_list;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -19,67 +19,67 @@ import javax.annotation.Generated;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
 @JsonPropertyOrder({
-        "url",
-        "width",
-        "height"
+        "default",
+        "medium",
+        "high"
 })
-public class Default {
+public class Thumbnails {
 
-    @JsonProperty("url")
-    private String url;
-    @JsonProperty("width")
-    private Integer width;
-    @JsonProperty("height")
-    private Integer height;
+    @JsonProperty("default")
+    private Default _default;
+    @JsonProperty("medium")
+    private Medium medium;
+    @JsonProperty("high")
+    private High high;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
-     * @return The url
+     * @return The _default
      */
-    @JsonProperty("url")
-    public String getUrl() {
-        return url;
+    @JsonProperty("default")
+    public Default getDefault() {
+        return _default;
     }
 
     /**
-     * @param url The url
+     * @param _default The default
      */
-    @JsonProperty("url")
-    public void setUrl(String url) {
-        this.url = url;
+    @JsonProperty("default")
+    public void setDefault(Default _default) {
+        this._default = _default;
     }
 
     /**
-     * @return The width
+     * @return The medium
      */
-    @JsonProperty("width")
-    public Integer getWidth() {
-        return width;
+    @JsonProperty("medium")
+    public Medium getMedium() {
+        return medium;
     }
 
     /**
-     * @param width The width
+     * @param medium The medium
      */
-    @JsonProperty("width")
-    public void setWidth(Integer width) {
-        this.width = width;
+    @JsonProperty("medium")
+    public void setMedium(Medium medium) {
+        this.medium = medium;
     }
 
     /**
-     * @return The height
+     * @return The high
      */
-    @JsonProperty("height")
-    public Integer getHeight() {
-        return height;
+    @JsonProperty("high")
+    public High getHigh() {
+        return high;
     }
 
     /**
-     * @param height The height
+     * @param high The high
      */
-    @JsonProperty("height")
-    public void setHeight(Integer height) {
-        this.height = height;
+    @JsonProperty("high")
+    public void setHigh(High high) {
+        this.high = high;
     }
 
     @Override
@@ -99,7 +99,7 @@ public class Default {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(url).append(width).append(height).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(_default).append(medium).append(high).append(additionalProperties).toHashCode();
     }
 
     @Override
@@ -107,11 +107,11 @@ public class Default {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Default) == false) {
+        if ((other instanceof Thumbnails) == false) {
             return false;
         }
-        Default rhs = ((Default) other);
-        return new EqualsBuilder().append(url, rhs.url).append(width, rhs.width).append(height, rhs.height).append(additionalProperties, rhs.additionalProperties).isEquals();
+        Thumbnails rhs = ((Thumbnails) other);
+        return new EqualsBuilder().append(_default, rhs._default).append(medium, rhs.medium).append(high, rhs.high).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }

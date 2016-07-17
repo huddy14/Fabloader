@@ -24,23 +24,24 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import jendrzyca.piotr.fabloader.Fabloader;
 import jendrzyca.piotr.fabloader.R;
-import jendrzyca.piotr.fabloader.ui.adapters.RecyclerViewListener;
-import jendrzyca.piotr.fabloader.ui.adapters.YoutubeListAdapter;
 import jendrzyca.piotr.fabloader.di.components.DaggerMainActivityComponent;
 import jendrzyca.piotr.fabloader.di.modules.MainActivityModule;
-import jendrzyca.piotr.fabloader.model.converter.SongDownload;
-import jendrzyca.piotr.fabloader.model.youtube.Item;
+import jendrzyca.piotr.fabloader.model.youtube.search_list.Item;
+import jendrzyca.piotr.fabloader.ui.adapters.RecyclerViewListener;
+import jendrzyca.piotr.fabloader.ui.adapters.YoutubeListAdapter;
 import jendrzyca.piotr.fabloader.ui.presenters.MainActivityPresenter;
 import jendrzyca.piotr.fabloader.ui.presenters.MainActivityPresenterImpl;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener,
-        RecyclerViewListener.SongItemEventListener, MainActivityPresenter.View  {
+        RecyclerViewListener.SongItemEventListener, MainActivityPresenter.View {
 
     @Inject
     MainActivityPresenterImpl presenter;
 
-    @Bind(R.id.rv)RecyclerView rc;
-    @Bind(R.id.loader)CircularFillableLoaders progress;
+    @Bind(R.id.rv)
+    RecyclerView rc;
+    @Bind(R.id.loader)
+    CircularFillableLoaders progress;
 
     SearchView searchView;
 
@@ -56,20 +57,19 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         initializeProgress();
 
         DaggerMainActivityComponent.builder()
-                .networkComponent(((Fabloader)getApplication()).getNetworkComponent())
+                .networkComponent(((Fabloader) getApplication()).getNetworkComponent())
                 .mainActivityModule(new MainActivityModule(this))
                 .build().inject(this);
     }
 
-    private void initializeRecyclerView()
-    {
+    private void initializeRecyclerView() {
         rc.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new YoutubeListAdapter(new ArrayList<jendrzyca.piotr.fabloader.model.youtube.Item>());
+        adapter = new YoutubeListAdapter(new ArrayList<Item>());
 
         rc.setAdapter(adapter);
 
-        rc.addOnItemTouchListener(new RecyclerViewListener(this,this));
+        rc.addOnItemTouchListener(new RecyclerViewListener(this, this));
     }
 
     private void initializeProgress() {
@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         rc.setVisibility(View.VISIBLE);
         progress.setVisibility(View.INVISIBLE);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu, menu);
@@ -97,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         searchView.setOnQueryTextListener(this);
         return true;
     }
-
 
 
     @Override
@@ -120,8 +120,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     //Przyciśnięcie itemu
     @Override
-    public void onTouch(String id) {
-        presenter.download(id);
+    public void onTouch(String id, String tittle) {
+        presenter.download(id, tittle);
 
         displayProgress();
     }
@@ -135,8 +135,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     @Override
-    public void onConverterResponse(SongDownload songDownload) {
-        showMessage(getString(R.string.communicate_fabuje)+songDownload.getTitle());
+    public void onConverterResponse() {
+        showMessage(getString(R.string.communicate_fabuje));
     }
 
     @Override
@@ -151,8 +151,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         displaySonglist();
     }
 
-    private void showMessage(String message)
-    {
+    private void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

@@ -18,7 +18,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import jendrzyca.piotr.fabloader.R;
-import jendrzyca.piotr.fabloader.model.youtube.Item;
+import jendrzyca.piotr.fabloader.model.youtube.search_list.Item;
 
 /**
  * Created by huddy on 7/9/16.
@@ -45,7 +45,8 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
         holder.description.setText(songs.get(position).getSnippet().getDescription());
         holder.tittle.setText(songs.get(position).getSnippet().getTitle());
         Picasso.with(context)
-                .load(songs.get(position).getSnippet().getThumbnails().getDefault().getUrl())
+                .load(songs.get(position).getSnippet().getThumbnails().getMedium().getUrl())
+                .fit()
                 .into(holder.thumbnail);
         String date = songs.get(position).getSnippet().getPublishedAt();
         holder.pubDate.setText(parseDate(date));
@@ -55,6 +56,7 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
     public int getItemCount() {
         return songs.size();
     }
+
 
 
     protected class YoutubeItemViewHolder extends RecyclerView.ViewHolder {
@@ -80,6 +82,10 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
         return songs.get(positoin).getId().getVideoId();
     }
 
+    public String getSongTittle(int position) {
+        return songs.get(position).getSnippet().getTitle();
+    }
+
     private String parseDate(String date)
     {
         Date d;
@@ -91,6 +97,6 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
             throw new RuntimeException(e);
         }
 
-        return new SimpleDateFormat("k:m, dd/MM/yyyy").format(d);
+        return new SimpleDateFormat("dd/MM/yyyy").format(d);
     }
 }

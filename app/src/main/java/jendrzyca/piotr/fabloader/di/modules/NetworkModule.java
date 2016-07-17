@@ -14,6 +14,10 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import jendrzyca.piotr.fabloader.model.youtube.video_details.Statistics;
+import jendrzyca.piotr.fabloader.model.youtube_dl.Formats;
+import jendrzyca.piotr.fabloader.utils.StatisticsDeserialzer;
+import jendrzyca.piotr.fabloader.utils.YoutubeDlDeserializer;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -29,6 +33,7 @@ public class NetworkModule {
 
     private final String BASE_URL_YOUTUBE = "https://www.googleapis.com";
     private final String BASE_URL_CONVERTER = "http://www.youtubeinmp3.com";
+    private final String BASE_URL_YOUTUBE_DOWNLOAD = "http://youtube-dl.appspot.com";
 
     public NetworkModule() {
     }
@@ -51,24 +56,39 @@ public class NetworkModule {
         return okHttpClient;
     }
 
+
     @Provides
     @Singleton
-
+    @Named("GsonDownloader")
     public Gson provideGson() {
         GsonBuilder gsonBuilder = new GsonBuilder()
-            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .registerTypeAdapter(Formats.class, new YoutubeDlDeserializer());
+
+        return gsonBuilder.create();
+    }
+
+    @Provides
+    @Singleton
+    @Named("GsonVideoContent")
+    public Gson provideGsonForVideoContent() {
+        GsonBuilder gsonBuilder = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .registerTypeAdapter(Statistics.class, new StatisticsDeserialzer());
+
         return gsonBuilder.create();
     }
 
     @Provides
     @Singleton
     @Named("RetrofitYoutube")
-    public Retrofit provideRetrofitYoutube(OkHttpClient client) {
+    public Retrofit provideRetrofitYoutube(@Named("GsonVideoContent") Gson gson, OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(BASE_URL_YOUTUBE)
                 .client(client)
-                .addConverterFactory(JacksonConverterFactory.create(new ObjectMapper()))
+                //.addConverterFactory(JacksonConverterFactory.create(new ObjectMapper()))
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         return retrofit;
 
@@ -76,12 +96,12 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    @Named("RetrofitConventer")
-    public Retrofit provideRetrofitConventer(Gson gson, OkHttpClient client) {
+    @Named("RetrofitDownloader")
+    public Retrofit provideRetrofitDownloader(@Named("GsonDownloader") Gson gson, OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .baseUrl(BASE_URL_CONVERTER)
+                .baseUrl(BASE_URL_YOUTUBE_DOWNLOAD)
                 .client(client)
                 .build();
         return retrofit;

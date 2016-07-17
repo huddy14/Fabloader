@@ -1,4 +1,4 @@
-package jendrzyca.piotr.fabloader.model.youtube;
+package jendrzyca.piotr.fabloader.model.youtube.search_list;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -23,7 +23,7 @@ import javax.annotation.Generated;
         "width",
         "height"
 })
-public class Medium {
+public class Default {
 
     @JsonProperty("url")
     private String url;
@@ -107,10 +107,10 @@ public class Medium {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Medium) == false) {
+        if ((other instanceof Default) == false) {
             return false;
         }
-        Medium rhs = ((Medium) other);
+        Default rhs = ((Default) other);
         return new EqualsBuilder().append(url, rhs.url).append(width, rhs.width).append(height, rhs.height).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 

@@ -1,4 +1,4 @@
-package jendrzyca.piotr.fabloader.model.youtube;
+package jendrzyca.piotr.fabloader.model.youtube.search_list;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;

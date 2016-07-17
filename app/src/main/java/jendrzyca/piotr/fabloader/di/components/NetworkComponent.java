@@ -19,10 +19,10 @@ import retrofit2.Retrofit;
 public interface NetworkComponent {
 
     @Named("RetrofitYoutube")
-    Retrofit retrofit();
+    Retrofit retrofitYoutube();
 
-    @Named("RetrofitConventer")
-    Retrofit RetrofitConventer();
+    @Named("RetrofitDownloader")
+    Retrofit retrofitDownloader();
 
     DownloadManager downloadManager();
 }

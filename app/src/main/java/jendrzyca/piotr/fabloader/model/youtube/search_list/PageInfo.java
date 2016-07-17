@@ -1,4 +1,4 @@
-package jendrzyca.piotr.fabloader.model.youtube;
+package jendrzyca.piotr.fabloader.model.youtube.search_list;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -19,48 +19,48 @@ import javax.annotation.Generated;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
 @JsonPropertyOrder({
-        "kind",
-        "videoId"
+        "totalResults",
+        "resultsPerPage"
 })
-public class Id {
+public class PageInfo {
 
-    @JsonProperty("kind")
-    private String kind;
-    @JsonProperty("videoId")
-    private String videoId;
+    @JsonProperty("totalResults")
+    private Integer totalResults;
+    @JsonProperty("resultsPerPage")
+    private Integer resultsPerPage;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
-     * @return The kind
+     * @return The totalResults
      */
-    @JsonProperty("kind")
-    public String getKind() {
-        return kind;
+    @JsonProperty("totalResults")
+    public Integer getTotalResults() {
+        return totalResults;
     }
 
     /**
-     * @param kind The kind
+     * @param totalResults The totalResults
      */
-    @JsonProperty("kind")
-    public void setKind(String kind) {
-        this.kind = kind;
+    @JsonProperty("totalResults")
+    public void setTotalResults(Integer totalResults) {
+        this.totalResults = totalResults;
     }
 
     /**
-     * @return The videoId
+     * @return The resultsPerPage
      */
-    @JsonProperty("videoId")
-    public String getVideoId() {
-        return videoId;
+    @JsonProperty("resultsPerPage")
+    public Integer getResultsPerPage() {
+        return resultsPerPage;
     }
 
     /**
-     * @param videoId The videoId
+     * @param resultsPerPage The resultsPerPage
      */
-    @JsonProperty("videoId")
-    public void setVideoId(String videoId) {
-        this.videoId = videoId;
+    @JsonProperty("resultsPerPage")
+    public void setResultsPerPage(Integer resultsPerPage) {
+        this.resultsPerPage = resultsPerPage;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class Id {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(kind).append(videoId).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(totalResults).append(resultsPerPage).append(additionalProperties).toHashCode();
     }
 
     @Override
@@ -88,11 +88,11 @@ public class Id {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Id) == false) {
+        if ((other instanceof PageInfo) == false) {
             return false;
         }
-        Id rhs = ((Id) other);
-        return new EqualsBuilder().append(kind, rhs.kind).append(videoId, rhs.videoId).append(additionalProperties, rhs.additionalProperties).isEquals();
+        PageInfo rhs = ((PageInfo) other);
+        return new EqualsBuilder().append(totalResults, rhs.totalResults).append(resultsPerPage, rhs.resultsPerPage).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }
